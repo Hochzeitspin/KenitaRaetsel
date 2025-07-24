@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hochzeitsrätsel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-image: url("Hintergrund.jpg");
+            background-size: cover;
+            background-position: center;
+            padding-top: 50px;
+        }
+
+        h1 {
+            color: white;
+            text-decoration: underline;
+            font-family: 'Great Vibes', cursive;
+            font-style: italic;
+            font-size: 48px;
+            margin-top: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .circle-container {
+            position: relative;
+            width: 700px;
+            height: 550px;
+            margin: 100px auto 0 auto; /* Mehr Abstand nach oben */
+        }
+
+        .circle-container img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            position: absolute;
+            animation: oval-rotation 12s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .circle-container img:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+        }
+
+        .circle-container img:nth-child(1) { animation-delay: 0s; }
+        .circle-container img:nth-child(2) { animation-delay: 1.5s; }
+        .circle-container img:nth-child(3) { animation-delay: 3s; }
+        .circle-container img:nth-child(4) { animation-delay: 4.5s; }
+        .circle-container img:nth-child(5) { animation-delay: 6s; }
+        .circle-container img:nth-child(6) { animation-delay: 7.5s; }
+        .circle-container img:nth-child(7) { animation-delay: 9s; }
+        .circle-container img:nth-child(8) { animation-delay: 10.5s; }
+
+        @keyframes oval-rotation {
+            0% {
+                top: 0%;
+                left: 50%;
+                transform: translate(-50%, 0%) scale(1);
+            }
+
+            12.5% {
+                top: 20%;
+                left: 85%;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            25% {
+                top: 50%;
+                left: 100%;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            37.5% {
+                top: 80%;
+                left: 85%;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                top: 100%;
+                left: 50%;
+                transform: translate(-50%, -100%) scale(1);
+            }
+
+            62.5% {
+                top: 80%;
+                left: 15%;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            75% {
+                top: 50%;
+                left: 0%;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            87.5% {
+                top: 20%;
+                left: 15%;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                top: 0%;
+                left: 50%;
+                transform: translate(-50%, 0%) scale(1);
+            }
+        }
+
+        .audio-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 12px 20px;
+            border-radius: 16px;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Herzlichen Glückwunsch zur Hochzeit</h1>
+
+    <div class="circle-container">
+        <img src="Bild1.jpg" alt="Bild 1">
+        <img src="Bild2.jpg" alt="Bild 2">
+        <img src="Bild3.jpg" alt="Bild 3">
+        <img src="Bild4.jpg" alt="Bild 4">
+        <img src="Bild5.jpg" alt="Bild 5">
+        <img src="Bild6.jpg" alt="Bild 6">
+        <img src="Bild7.jpg" alt="Bild 7">
+        <img src="Bild8.jpg" alt="Bild 8">
+
+        <div class="audio-container">
+            <audio controls>
+                <source src="Everybody.mp3" type="audio/mpeg">
+                Dein Browser unterstützt das Audio-Element nicht.
+            </audio>
+        </div>
+    </div>
+</body>
+
+</html>

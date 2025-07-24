@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HochzeitGeldgeschenktruhe:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/HochzeitGeldgeschenktruhe_jar</output-path>
+    <root id="archive" name="HochzeitGeldgeschenktruhe.jar">
+      <element id="module-output" name="HochzeitGeldgeschenktruhe" />
+    </root>
+  </artifact>
+</component>
