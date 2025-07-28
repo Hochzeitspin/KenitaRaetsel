@@ -1,8 +1,8 @@
-import java.security.*;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.security.*;
 
 
 public class Readme {
@@ -21,41 +21,41 @@ public class Readme {
         "Viele Grüße von Anitas Junggesellen";
 
 
-        String Gedicht =
-        "Bei der Bayrischen Versorgungskammer hats angefangen,\n" +
+         String Gedicht =
+        "❤Bei der Bayrischen Versorgungskammer hats angefangen,\n" +
         "beim Coden wurden eure Herzen gefangen.\n" +
-        "Ein Wortgefecht bringt euch nah zusammen in dieser Zeit,\n" +
+        "❤Ein Wortgefecht bringt euch nah zusammen in dieser Zeit,\n" +
         "ab da gabs nur Unzertrennlichkeit.\n" +
-        "Kenita ward euer Pärchenname, so wunderbar,\n" +
+        "❤Kenita ward euer Pärchenname, so wunderbar,\n" +
         "verschmolzen zu einem Traumpaar.\n" +
         "\n" +
-        "Unser Fitness Couple, das Abenteuer liebt,\n" +
+        "❤Unser Fitness Couple, das Abenteuer liebt,\n" +
         "beim Wandern, und Billard stets vergnügt.\n" +
-        "Zocken, Krimidinner, Pen&Paper und Brettspiel,\n" +
+        "❤Zocken, Krimidinner, Pen&Paper und Brettspiel,\n" +
         "ihr zwei erobert die Welt mit eurem wundervollen Stil.\n" +
         "\n" +
-        "Ein Team durch Lachen, Magie und Kraft, \n" +
+        "❤Ein Team durch Lachen, Magie und Kraft, \n" +
         "kein Wunder das eure DSA-Gruppe alles schafft.\n" +
-        "Fiana, die Bogenschützin, so gewandt,\n" +
+        "❤Fiana, die Bogenschützin, so gewandt,\n" +
         "wirft Knochen und prophezeit dann mit Verstand.\n" +
-        "Elkwin der Magier heilt mit Bedacht,\n" +
+        "❤Elkwin der Magier heilt mit Bedacht,\n" +
         "vorsichtig wirkt er seine Macht,\n" +
         "besonders auf die Sauberkeit gibt er immer acht.\n" +
-        "Nehmt von den beiden einiges mit,\n" +
+        "❤Nehmt von den beiden einiges mit,\n" +
         "eins steht fest, sie sind auf jeden Fall der Hit.\n" +
         "\n" +
-        "Romantik blüht, die Reise geht weiter,\n" +
+        "❤Romantik blüht, die Reise geht weiter,\n" +
         "durch fließende Ströme und Vulkane, stets heiter.\n" +
-        "Unterm Wasserfall ein Bild so rein,\n" +
+        "❤Unterm Wasserfall ein Bild so rein,\n" +
         "wie Movie-Stars posiert ihr so fein,\n" +
         "The Final Decision - der Film, muss das wohl sein.\n" +
         "\n" +
-        "In Indonesien, am Strand einer Gili,\n" +
+        "❤In Indonesien, am Strand einer Gili,\n" +
         "fiel Kevin auf die Knie, so ganz galant, wie nie.\n" +
-        "Ein Ring, ein Ja, ein Moment so klar,\n" +
+        "❤Ein Ring, ein Ja, ein Moment so klar,\n" +
         "die Liebe besiegelt, für immerdar.\n" +
         "\n" +
-        "Drum lasst uns anstoßen, auf Kenita, das Paar,\n" +
+        "❤Drum lasst uns anstoßen, auf Kenita, das Paar,\n" +
         "für immer verbunden, im Glück das ist ja klar.";
 
 
@@ -68,7 +68,7 @@ public class Readme {
         "Die Lösung kommt auch im Gedicht vor, aber Achtung Fangfrage:)";
 
         // Tragt hier bitte eure Antwort von Rätsel1 ein und startet das Program
-        String AntwortRätsel1 = "hier";
+        String AntwortRätsel1 = "E";
 
 
 
@@ -181,7 +181,7 @@ public class Readme {
         // Rätsel3: -START- ###############################################################################################
         // Um Rätsel3 lösen zu können gebt bitte bei "String html File" "öffnen" ein und startet,
         // dann sollte sich ein html-File für euch öffnen :)
-        String htmlFile = "hier";
+        String htmlFile = "öffnen";
 
         // hier kommt Rätsel3, könnt ihr die Lösung im html-File entdecken, wie oft kommt sie vor?
         String raetselText3 =
@@ -236,13 +236,39 @@ public class Readme {
 
                 if (candidate.exists()) {
                     file = candidate;
-                } else {
-                    // 2. Fallback: relativ zum Arbeitsverzeichnis
-                    candidate = new File(System.getProperty("user.dir"), "WebsiteRätsel3/index9.html");
-                    if (candidate.exists()) {
-                        file = candidate;
+                } else 
+                            // 2. Fallback: relativ zum Arbeitsverzeichnis
+                            candidate = new File(System.getProperty("user.dir"), "WebsiteRätsel3/index9.html");
+                        if (candidate.exists()) {
+                            file = candidate;
+                        } else {
+
+                            // 3. Fallback Suche im Arbeitsverzeichnis
+                        java.io.File dir = new java.io.File(System.getProperty("user.dir"));
+                        java.util.Stack<java.io.File> stack = new java.util.Stack<>();
+                        stack.push(dir);
+
+                        String result = null;
+                        while (!stack.isEmpty()) {
+                            java.io.File current = stack.pop();
+                            java.io.File[] files = current.listFiles();
+                            if (files == null) {
+                                continue;
+                            }
+
+                            for (java.io.File f : files) {
+                                if (f.isDirectory()) {
+                                    stack.push(f);
+                                } else if ("index9.html".equals(f.getName())) {
+                                    result = f.getAbsolutePath();
+                                    stack.clear(); // Suche abbrechen
+                                    break;
+                                }
+                            }
+                        }
+
+                        file = new File(result);
                     }
-                }
 
                 if (file != null && file.exists()) {
                     if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
@@ -281,7 +307,7 @@ public class Readme {
 
 
         // Tragt hier bitte eure Antwort von Rätsel4 ein
-        int AntwortRätsel4 = 0                                                                                                                                                                                                                                                                              ;
+        int AntwortRätsel4 = 5                                                                                                                                                                                                                                                                              ;
 
 
                 // Überprüfung eurer Antwort Rätsel4 (also nicht interessant für euch, für Tipps weiter runter scrollen)
