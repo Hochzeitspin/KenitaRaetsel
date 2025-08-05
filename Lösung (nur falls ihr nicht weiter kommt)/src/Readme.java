@@ -227,62 +227,67 @@ public class Readme {
 
         if ("öffnen".equals(htmlFile)) {
             try {
-                File file = null;
+                File file = new File(Readme.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+                        .getParentFile()
+                        .toPath()
+                        .resolve("../WebsiteRätsel3/index9.html")
+                        .normalize()
+                        .toFile();
 
-                // 1. Versuche relativ zur JAR- oder .class-Datei
-                File baseDir = new File(Readme.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
-                File candidate = new File(baseDir, "WebsiteRätsel3/index9.html");
+                if (!file.exists()) {
+                    // Backup-Suche relativ zum Arbeitsverzeichnis
+                    file = new File(System.getProperty("user.dir"), "WebsiteRätsel3/index9.html");
+                }
 
-                if (candidate.exists()) {
-                    file = candidate;
-                } else
-                    // 2. Fallback: relativ zum Arbeitsverzeichnis
-                    candidate = new File(System.getProperty("user.dir"), "WebsiteRätsel3/index9.html");
-                if (candidate.exists()) {
-                    file = candidate;
-                } else {
-
-                    // 3. Fallback Suche im Arbeitsverzeichnis
+                if (!file.exists()) {
+                    // 3. Fallback Suche im Arbeitsverzeichnis (rekursiv)
                     java.io.File dir = new java.io.File(System.getProperty("user.dir"));
                     java.util.Stack<java.io.File> stack = new java.util.Stack<>();
                     stack.push(dir);
 
-                    String result = null;
+                    String foundPath = null;
                     while (!stack.isEmpty()) {
                         java.io.File current = stack.pop();
                         java.io.File[] files = current.listFiles();
                         if (files == null) {
                             continue;
                         }
-
                         for (java.io.File f : files) {
                             if (f.isDirectory()) {
                                 stack.push(f);
                             } else if ("index9.html".equals(f.getName())) {
-                                result = f.getAbsolutePath();
+                                foundPath = f.getAbsolutePath();
                                 stack.clear(); // Suche abbrechen
                                 break;
                             }
                         }
                     }
 
-                    file = new File(result);
+                    if (foundPath != null) {
+                        file = new File(foundPath);
+                    }
                 }
 
-                if (file != null && file.exists()) {
-                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                        Desktop.getDesktop().browse(file.toURI());
-                    } else {
+                if (file.exists()) {
+                    try {
+                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                            Desktop.getDesktop().browse(file.toURI());
+                        } else {
+                            openFileWithDefaultProgram(file.getAbsolutePath());
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Desktop konnte nicht verwendet werden. Versuche Fallback...");
                         openFileWithDefaultProgram(file.getAbsolutePath());
                     }
                 } else {
-                    System.out.println("Die Datei wurde nicht gefunden, bitte manuel öffnen: hier ist nichts interessantes/WebsiteRätsel3/index9.html");
+                    System.out.println("Die HTML-Datei konnte nicht gefunden werden. Bitte öffnet sie manuell: hier ist nichts interessantes/WebsiteRätsel3/index9.html");
                 }
-
-            } catch (URISyntaxException | IOException e) {
+            } catch (Exception e) {
+                System.out.println("Fehler beim Öffnen der HTML-Datei:");
                 e.printStackTrace();
             }
         }
+
 
         // Tipps für Rätsel3
         // Tipp 1: Man kann es nicht essen
